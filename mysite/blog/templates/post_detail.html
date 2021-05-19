@@ -11,6 +11,32 @@
         </div>
         {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
     </div>
+
+    {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+            <p class="font-weight-bold">
+                {{ comment.name }}
+                <span class=" text-muted font-weight-normal">
+                    {{ comment.created_on }}
+                </span>
+            </p>
+            {{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
+
+    <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+            Seu comentário irá ser checando e postado!
+        </div>
+        <h3>Deixe um comentário</h3>
+        <form method="post" style="margin-top: 1.3em;">
+            {{ comment_form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-lg">Envie!</button>
+        </form>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock content %}

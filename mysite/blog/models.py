@@ -24,7 +24,23 @@ class Post(models.Model):
     def __str__(self):#human-readable representation of the object
         return self.title
 
-class Enquetes(models.Model):
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments') #n entendi muito bem!
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default = False)
+
+    class Meta:
+        ordering = ['-created_on']# o sinal de negativo é para fazer os comentários mais recentes ficarem em cima da busca(do d.b.)
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.body, self.name)
+
+
+class Enquetes(models.Model):#implementar posteriormente a classe enquetes
     nome_enquete = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='enquetes')
