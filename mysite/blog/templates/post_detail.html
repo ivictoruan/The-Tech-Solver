@@ -36,11 +36,12 @@
                     Obrigado por comentar. Seu comentário será analisado e postado!
                 </div>
                 {% else %}
+                {% load crispy_forms_tags %}
                 <h3>Deixe um comentário</h3>
                 <form method="post" style="margin-top: 1.3em;">
-                    {{ comment_form.as_p }}
+                    {{ comment_form | crispy }}
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+                    <button type="submit" class="btn btn-primary  btn-lg">Enviar</button>
                 </form>
                 {% endif %}
             </div>

@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import Post, Enquetes, Comment
 
-# Register your models here.
+
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'status','criado_em')
     list_filter = ('status',)
@@ -19,4 +20,4 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(active=True)
 
 admin.site.register(Post, PostAdmin)
-admin.site.register(Enquetes)
+#admin.site.register(Enquetes)
